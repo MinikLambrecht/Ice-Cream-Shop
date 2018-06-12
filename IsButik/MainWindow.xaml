@@ -27,29 +27,29 @@
         <TabControl Grid.Column="2" HorizontalAlignment="Left" Height="449" VerticalAlignment="Top" Width="457">
             <TabItem Header="Gelato">
                 <Grid Background="#00E5E5E5" HorizontalAlignment="Right" Width="451">
-                    <Image Height="100" VerticalAlignment="Top" Margin="0,0,351,0" Width="100"/>
+                    <Image x:Name="Flavour_Vanilla" Height="100" VerticalAlignment="Top" Margin="0,0,351,0" Width="100"/>
                     <Label Content="Vanilla" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,100,0,296" Width="100" RenderTransformOrigin="0.493,0.475" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="115,0,236,0" Width="100"/>
+                    <Image x:Name="Flavour_Strawberry" Height="100" VerticalAlignment="Top" Margin="115,0,236,0" Width="100"/>
                     <Label Content="Strawberry" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="228,0,114,0" Width="109"/>
+                    <Image x:Name="Flavour_Chocolate" Height="100" VerticalAlignment="Top" Margin="228,0,114,0" Width="109"/>
                     <Label Content="Chocolate" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,100,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="351,0,0,0" Width="100"/>
+                    <Image x:Name="Flavour_Limone" Height="100" VerticalAlignment="Top" Margin="351,0,0,0" Width="100"/>
                     <Label Content="Limone" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,100,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Margin="0,146,351,175" Width="100"/>
+                    <Image x:Name="Flavour_Pistacchio" Margin="0,146,351,175" Width="100"/>
                     <Label Content="Pistacchio" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,246,0,150" Width="100" RenderTransformOrigin="0.493,0.51" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="115,146,236,0" Width="100"/>
+                    <Image x:Name="Flavour_Caffé" Height="100" VerticalAlignment="Top" Margin="115,146,236,0" Width="100"/>
                     <Label Content="Caffè" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,246,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="228,146,114,0" Width="109"/>
+                    <Image x:Name="Flavour_Pesca" Height="100" VerticalAlignment="Top" Margin="228,146,114,0" Width="109"/>
                     <Label Content="Pesca" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,246,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="351,146,0,0" Width="100"/>
+                    <Image x:Name="Flavour_Cocco" Height="100" VerticalAlignment="Top" Margin="351,146,0,0" Width="100"/>
                     <Label Content="Cocco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,246,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="0,296,351,0" Width="100"/>
+                    <Image x:Name="Flavour_Stacciatella" Height="100" VerticalAlignment="Top" Margin="0,296,351,0" Width="100"/>
                     <Label Content="Stracciatella" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,396,0,0" VerticalAlignment="Top" Height="25" Width="100" RenderTransformOrigin="0.733,0.475" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="115,296,236,0" Width="100"/>
+                    <Image x:Name="Flavour_Menta" Height="100" VerticalAlignment="Top" Margin="115,296,236,0" Width="100"/>
                     <Label Content="Menta" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,396,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="228,296,114,0" Width="109"/>
+                    <Image x:Name="Flavour_Melone" Height="100" VerticalAlignment="Top" Margin="228,296,114,0" Width="109"/>
                     <Label Content="Melone" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,396,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
-                    <Image Height="100" VerticalAlignment="Top" Margin="351,296,0,0" Width="100"/>
+                    <Image x:Name="Flavour_Banana" Height="100" VerticalAlignment="Top" Margin="351,296,0,0" Width="100"/>
                     <Label Content="Banana" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,396,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
