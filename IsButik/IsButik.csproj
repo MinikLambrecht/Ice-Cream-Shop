@@ -68,6 +68,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Values.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +93,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Cup.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Containers.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Sprinkles.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\MediumCone.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\SmallCone.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\BigCone.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Banana.jpg" />
+    <Resource Include="Resources\Caffé.jpg" />
+    <Resource Include="Resources\Chocolate.jpg" />
+    <Resource Include="Resources\Cocco.jpg" />
+    <Resource Include="Resources\Limone.jpg" />
+    <Resource Include="Resources\Melone.jpg" />
+    <Resource Include="Resources\Menta.jpg" />
+    <Resource Include="Resources\Pesca.jpg" />
+    <Resource Include="Resources\Pistacchio.jpg" />
+    <Resource Include="Resources\Stracciatella.jpg" />
+    <Resource Include="Resources\Strawberry.jpg" />
+    <Resource Include="Resources\Vanilla.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

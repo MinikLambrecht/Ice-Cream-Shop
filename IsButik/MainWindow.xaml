@@ -1,12 +1,61 @@
-﻿<Window x:Class="IsButik.MainWindow"
+﻿<Window x:Name="MainForm" x:Class="IsButik.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IsButik"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Ice Cream Shop" Height="480" Width="720" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Grid0" Width="250" MaxWidth="250" MinWidth="250"/>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition x:Name="Grid1" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Background="Black" />
+        <ComboBox x:Name="CB_Containers" Margin="30,45,30,0" VerticalAlignment="Top" BorderBrush="{x:Null}" SelectionChanged="CB_Containers_SelectionChanged"/>
+        <ComboBox x:Name="CB_Scoops" Margin="30,196,30,0" VerticalAlignment="Top" BorderBrush="{x:Null}" IsEnabled="False"/>
+        <ComboBox x:Name="CB_Sprinkles_2" Margin="30,285,30,0" VerticalAlignment="Top" BorderBrush="{x:Null}"/>
+        <ComboBox x:Name="CB_Sprinkles_3" Margin="30,312,30,0" VerticalAlignment="Top" BorderBrush="{x:Null}"/>
+        <Label Content="Containers:" Margin="30,10,30,0" FontSize="14" FontFamily="Verdana" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Scoop(s):" Margin="30,161,30,0" FontSize="14" FontFamily="Verdana" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Sprinkle(s):" Margin="30,223,30,0" FontSize="14" FontFamily="Verdana" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Filling:" Margin="30,72,30,0" FontSize="14" FontFamily="Verdana" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30"/>
+        <ComboBox x:Name="CB_Sprinkles_1" Margin="30,258,30,0" VerticalAlignment="Top" BorderBrush="{x:Null}"/>
+        <RadioButton x:Name="RB_Softice" Content="Softice" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="30,134,0,0" VerticalAlignment="Top" Height="22" RenderTransformOrigin="1.012,0.785" Width="190" GroupName="IceType" Checked="RB_Softice_Checked"/>
+        <RadioButton x:Name="RB_Gelato" Content="Gelato" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="30,107,0,0" VerticalAlignment="Top" Height="22" Width="190" GroupName="IceType" IsChecked="True" Checked="RB_Gelato_Checked"/>
+        <TabControl Grid.Column="2" HorizontalAlignment="Left" Height="449" VerticalAlignment="Top" Width="457">
+            <TabItem Header="Gelato">
+                <Grid Background="#00E5E5E5" HorizontalAlignment="Right" Width="451">
+                    <Image Height="100" VerticalAlignment="Top" Margin="0,0,351,0" Width="100"/>
+                    <Label Content="Vanilla" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,100,0,296" Width="100" RenderTransformOrigin="0.493,0.475" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="115,0,236,0" Width="100"/>
+                    <Label Content="Strawberry" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="228,0,114,0" Width="109"/>
+                    <Label Content="Chocolate" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,100,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="351,0,0,0" Width="100"/>
+                    <Label Content="Limone" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,100,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Margin="0,146,351,175" Width="100"/>
+                    <Label Content="Pistacchio" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,246,0,150" Width="100" RenderTransformOrigin="0.493,0.51" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="115,146,236,0" Width="100"/>
+                    <Label Content="Caffè" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,246,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="228,146,114,0" Width="109"/>
+                    <Label Content="Pesca" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,246,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="351,146,0,0" Width="100"/>
+                    <Label Content="Cocco" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,246,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="0,296,351,0" Width="100"/>
+                    <Label Content="Stracciatella" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,396,0,0" VerticalAlignment="Top" Height="25" Width="100" RenderTransformOrigin="0.733,0.475" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="115,296,236,0" Width="100"/>
+                    <Label Content="Menta" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="115,396,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="228,296,114,0" Width="109"/>
+                    <Label Content="Melone" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="228,396,0,0" VerticalAlignment="Top" Height="25" Width="109" FontFamily="Verdana" FontWeight="Bold"/>
+                    <Image Height="100" VerticalAlignment="Top" Margin="351,296,0,0" Width="100"/>
+                    <Label Content="Banana" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="351,396,0,0" VerticalAlignment="Top" Height="25" Width="100" FontFamily="Verdana" FontWeight="Bold"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Softice">
+                <Grid Background="#00E5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
