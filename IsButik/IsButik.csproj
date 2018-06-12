@@ -94,7 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Chocolat_Softice.jpg" />
+    <Resource Include="Resources\Strawberry_Softice.jpg" />
+    <Resource Include="Resources\Vanilla_Softice.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Files\Cup.txt" />
   </ItemGroup>
