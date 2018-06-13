@@ -3,20 +3,37 @@ using System.Windows.Controls;
 using IsButik.Modules;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System;
 
 namespace IsButik
 {
     public partial class MainWindow : Window
     {
-        string data;
+        #region Variables
+
+        List<string> containerPrices = new List<string>();
+
+        private float totalSprinklePrice;
+
+        #endregion
+
+        // Constructor
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initialize UpdateValues Method to update data to program
             UpdateValues();
+            CreateDirectories();
         }
+
+        #region Methods
 
         private void UpdateValues()
         {
+
             #region Containers
 
             // Add data from resources to lists
@@ -34,9 +51,13 @@ namespace IsButik
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    Values.containers.Add(line);
+                    string[] lines = Regex.Split(line, ",");
+                    Values.containers.Add(lines[0]);
+                    containerPrices.Add(lines[1]);
                 }
             }
+
+            CB_Containers.SelectedIndex = 0;
 
             #endregion
 
@@ -60,6 +81,8 @@ namespace IsButik
                 }
             }
 
+            CB_Scoops.SelectedIndex = 0;
+
             #endregion
 
             #region Small Cone
@@ -79,6 +102,8 @@ namespace IsButik
                     Values.scoops_SmallCone.Add(line);
                 }
             }
+
+            CB_Scoops.SelectedIndex = 0;
 
             #endregion
 
@@ -100,6 +125,8 @@ namespace IsButik
                 }
             }
 
+            CB_Scoops.SelectedIndex = 0;
+
             #endregion
 
             #region Big Cone
@@ -119,6 +146,8 @@ namespace IsButik
                     Values.scoops_BigCone.Add(line);
                 }
             }
+
+            CB_Scoops.SelectedIndex = 0;
 
             #endregion
 
@@ -147,9 +176,35 @@ namespace IsButik
                 }
             }
 
+            CB_Sprinkles_1.SelectedIndex = 0;
+            CB_Sprinkles_2.SelectedIndex = 0;
+            CB_Sprinkles_3.SelectedIndex = 0;
+
             #endregion
 
         }
+
+        private void CreateDirectories()
+        {
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string rootDirectory = Path.Combine(appdata, "IceCreamShop");
+            string subDir = Path.Combine(rootDirectory, "Settings");
+
+            // If directory does not exist, create it. 
+            if (!Directory.Exists(rootDirectory))
+            {
+                Directory.CreateDirectory(rootDirectory);
+            }
+
+            if (!Directory.Exists(subDir))
+            {
+                Directory.CreateDirectory(subDir);
+            }
+        }
+
+        #endregion
+
+        #region Events
 
         private void CB_Containers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -167,18 +222,26 @@ namespace IsButik
             if (CB_Containers.SelectedIndex == 0)
             {
                 CB_Scoops.ItemsSource = Values.scoops_Cup;
+                CB_Scoops.SelectedIndex = 0;
+                txt_Containers.Content = "containers: " + containerPrices[0];
             }
             else if (CB_Containers.SelectedIndex == 1)
             {
                 CB_Scoops.ItemsSource = Values.scoops_SmallCone;
+                CB_Scoops.SelectedIndex = 0;
+                txt_Containers.Content = "containers: " + containerPrices[1];
             }
             else if (CB_Containers.SelectedIndex == 2)
             {
                 CB_Scoops.ItemsSource = Values.scoops_MediumCone;
+                CB_Scoops.SelectedIndex = 0;
+                txt_Containers.Content = "containers: " + containerPrices[2];
             }
             else if (CB_Containers.SelectedIndex == 3)
             {
                 CB_Scoops.ItemsSource = Values.scoops_BigCone;
+                CB_Scoops.SelectedIndex = 0;
+                txt_Containers.Content = "containers: " + containerPrices[3];
             }
         }
 
@@ -188,6 +251,12 @@ namespace IsButik
             if (CB_Containers.SelectedIndex != -1)
             {
                 CB_Scoops.IsEnabled = true;
+                tab_Gelato.IsEnabled = true;
+                tab_Softice.IsEnabled = false;
+
+                tab_Gelato.Visibility = Visibility.Visible;
+                tab_Softice.Visibility = Visibility.Hidden;
+                TabCtrl.SelectedIndex = 0;
             }
             else
             {
@@ -199,6 +268,62 @@ namespace IsButik
         {
             // If softice is checked don't enable scoops combobox
             CB_Scoops.IsEnabled = false;
+            tab_Softice.IsEnabled = true;
+            tab_Gelato.IsEnabled = false;
+
+            tab_Gelato.Visibility = Visibility.Hidden;
+            tab_Softice.Visibility = Visibility.Visible;
+            TabCtrl.SelectedIndex = 1;
+        }
+
+        private void RB_SN0_Checked(object sender, RoutedEventArgs e)
+        {
+            CB_Sprinkles_1.Visibility = Visibility.Hidden;
+            CB_Sprinkles_2.Visibility = Visibility.Hidden;
+            CB_Sprinkles_3.Visibility = Visibility.Hidden;
+
+            totalSprinklePrice = 0f;
+            txt_Sprinkles.Content = "Sprinkle(s): " + totalSprinklePrice + "$";
+        }
+
+        private void RB_SN1_Checked(object sender, RoutedEventArgs e)
+        {
+            CB_Sprinkles_1.Visibility = Visibility.Visible;
+            CB_Sprinkles_2.Visibility = Visibility.Hidden;
+            CB_Sprinkles_3.Visibility = Visibility.Hidden;
+
+            totalSprinklePrice = 1.50f;
+            txt_Sprinkles.Content = "Sprinkle(s): " + totalSprinklePrice + "$";
+        }
+
+        private void RB_SN2_Checked(object sender, RoutedEventArgs e)
+        {
+            CB_Sprinkles_1.Visibility = Visibility.Visible;
+            CB_Sprinkles_2.Visibility = Visibility.Visible;
+            CB_Sprinkles_3.Visibility = Visibility.Hidden;
+
+            totalSprinklePrice = 3f;
+            txt_Sprinkles.Content = "Sprinkle(s): " + totalSprinklePrice + "$";
+        }
+
+        private void RB_SN3_Checked(object sender, RoutedEventArgs e)
+        {
+            CB_Sprinkles_1.Visibility = Visibility.Visible;
+            CB_Sprinkles_2.Visibility = Visibility.Visible;
+            CB_Sprinkles_3.Visibility = Visibility.Visible;
+
+            totalSprinklePrice = 4.50f;
+            txt_Sprinkles.Content = "Sprinkle(s): " + totalSprinklePrice + "$";
+        }
+
+        #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }

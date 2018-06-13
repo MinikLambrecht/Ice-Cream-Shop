@@ -1,4 +1,4 @@
-﻿Cup
-Small Cone
-Medium Cone
-Big Cone
+﻿Cup, 5$
+Small Cone, 7$
+Medium Cone, 10$
+Big Cone, 13$
