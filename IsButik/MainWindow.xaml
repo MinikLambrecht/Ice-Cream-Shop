@@ -64,15 +64,31 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Checkout" Margin="-53,-2,49,0">
-                <Grid Background="#00E5E5E5"/>
+                <Grid Background="#00E5E5E5">
+                    <Label Content="Full name:" Margin="10,89,355,0" HorizontalContentAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize=" 10" VerticalAlignment="Top" Height="22"/>
+                    <TextBox x:Name="txt_FullName" Height="20" Margin="10,111,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" SelectionBrush="#FF0078D7" Text="Full Name" Foreground="#FF4F4F4D" BorderBrush="Black" GotFocus="txt_FullName_GotFocus" LostFocus="txt_FullName_LostFocus" PreviewTextInput="txt_FullName_PreviewTextInput" MaxLength="50"/>
+                    <Label Content="Card number:" Margin="10,136,355,0" HorizontalContentAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize=" 10" VerticalAlignment="Top" Height="22"/>
+                    <TextBox x:Name="txt_CardNo" Height="20" Margin="10,158,10,0" TextWrapping="NoWrap" VerticalAlignment="Top" Text="**** **** **** ****" Foreground="#FF4F4F4D" MaxLength="19" SelectionBrush="#FF0078D7" BorderBrush="Black" GotFocus="txt_CardNo_GotFocus" PreviewTextInput="txt_CardNo_PreviewTextInput" LostFocus="txt_CardNo_LostFocus"/>
+                    <Label Content="Expiration:" Margin="10,183,355,0" HorizontalContentAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize=" 10" VerticalAlignment="Top" Height="22"/>
+                    <Label Content="CVC:" Margin="101,183,264,0" HorizontalContentAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize="10" VerticalAlignment="Top" Height="22"/>
+                    <TextBox x:Name="txt_CVC" Height="20" Margin="101,210,264,0" TextWrapping="NoWrap" VerticalAlignment="Top" MaxLength="3" Text="CVC" SelectionBrush="#FF0078D7" Foreground="#FF4F4F4D" BorderBrush="Black" PreviewTextInput="txt_CVC_PreviewTextInput" GotFocus="txt_CVC_GotFocus" LostFocus="txt_CVC_LostFocus"/>
+                    <RadioButton Content="Mastercard" HorizontalAlignment="Left" FontFamily="Verdana" Margin="10,40,0,0" VerticalAlignment="Top" GroupName="PaymentOptions" IsChecked="True"/>
+                    <RadioButton Content="Visa" HorizontalAlignment="Left" FontFamily="Verdana" Margin="101,40,0,0" VerticalAlignment="Top" GroupName="PaymentOptions"/>
+                    <RadioButton Content="Credit Cards" HorizontalAlignment="Left" FontFamily="Verdana" Margin="150,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.429" GroupName="PaymentOptions"/>
+                    <Label Content="Payment options:" HorizontalAlignment="Left" FontFamily="Verdana" FontWeight="Bold"  Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Payment details:" HorizontalAlignment="Left" FontFamily="Verdana" FontWeight="Bold"  Margin="10,59,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt_Exp_Month" Height="20" Margin="10,210,398,0" TextWrapping="NoWrap" VerticalAlignment="Top" Text="MM" SelectionBrush="#FF0078D7" Foreground="#FF4F4F4D" Width="40" BorderBrush="Black" GotFocus="txt_Exp_Month_GotFocus" MaxLength="2" PreviewTextInput="txt_Exp_Month_PreviewTextInput" LostFocus="txt_Exp_Month_LostFocus"/>
+                    <TextBox x:Name="txt_Exp_Year" Height="20" Margin="56,210,355,0" TextWrapping="NoWrap" VerticalAlignment="Top" Text="YY" SelectionBrush="#FF0078D7" Foreground="#FF4F4F4D" Width="40" BorderBrush="Black" GotFocus="txt_Exp_Year_GotFocus" MaxLength="2" PreviewTextInput="txt_Exp_Year_PreviewTextInput" LostFocus="txt_Exp_Year_LostFocus"/>
+                    <Button Content="Pay" Margin="130,383,130,0" FontFamily="Verdana" FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Height="30" Width="191"/>
+                </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="Btn_PlaceOrder" Content="Place order" HorizontalAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize="20" Margin="30,366,0,0" VerticalAlignment="Top" Width="190" Height="30"/>
+        <Button x:Name="Btn_PlaceOrder" Content="Place order" HorizontalAlignment="Left" FontFamily="Verdana" FontWeight="Bold" FontSize="20" Margin="30,366,0,0" VerticalAlignment="Top" Width="190" Height="30" Click="Btn_PlaceOrder_Click"/>
         <RadioButton x:Name="RB_SN0" Content="None" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="30,253,0,0" VerticalAlignment="Top" Height="22" Width="60" GroupName="SprinklesToAdd" IsChecked="True" Checked="RB_SN0_Checked" RenderTransformOrigin="1.1,0.545"/>
         <RadioButton x:Name="RB_SN1" Content="1" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="95,253,0,0" VerticalAlignment="Top" Height="22" Width="35" GroupName="SprinklesToAdd" IsChecked="False" Checked="RB_SN1_Checked" RenderTransformOrigin="1.1,0.545"/>
         <RadioButton x:Name="RB_SN2" Content="2" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="140,253,0,0" VerticalAlignment="Top" Height="22" Width="35" GroupName="SprinklesToAdd" IsChecked="False" Checked="RB_SN2_Checked" RenderTransformOrigin="0.975,0.5"/>
         <RadioButton x:Name="RB_SN3" Content="3" HorizontalAlignment="Left" FontFamily="Verdana" FontSize="16" Margin="185,253,0,0" VerticalAlignment="Top" Height="22" Width="35" GroupName="SprinklesToAdd" IsChecked="False" Checked="RB_SN3_Checked" RenderTransformOrigin="0.971,0.545"/>
-        <Button Content="Exit" FontFamily="Verdana" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="30,405,0,0" VerticalAlignment="Top" Width="90" Click="Button_Click"/>
-        <Button Content="Settings" FontFamily="Verdana" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="130,405,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="Btn_Exit" Content="Exit" FontFamily="Verdana" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="30,405,0,0" VerticalAlignment="Top" Width="90" Click="Btn_Exit_Click"/>
+        <Button x:Name="Btn_Settings" Content="Settings" FontFamily="Verdana" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="130,405,0,0" VerticalAlignment="Top" Width="90" Click="Btn_Settings_Click"/>
     </Grid>
 </Window>

@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IsButik"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="480" ResizeMode="NoResize">
+        Title="Settings" Height="450" Width="480" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <Label Content="Storage" FontFamily="Verdana" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center" Margin="150,25,150,0" VerticalAlignment="Top"/>
-        <RadioButton Content="Store locally" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Left" Margin="150,64,0,0" VerticalAlignment="Top" Height="18" Width="174" IsChecked="True" GroupName="Storage"/>
-        <RadioButton Content="Store In Database" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Left" Margin="150,87,0,0" VerticalAlignment="Top" Height="18" Width="174" IsChecked="False" GroupName="Storage"/>
-        <Button Content="Save Settings" FontFamily="Verdana" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="150,371,0,0" VerticalAlignment="Top" Width="174" Height="40"/>
+        <RadioButton x:Name="RB_SaveLocally" Content="Store locally" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Left" Margin="150,64,0,0" VerticalAlignment="Top" Height="18" Width="174" GroupName="Storage" Checked="RB_SaveLocally_Checked"/>
+        <RadioButton x:Name="RB_SaveInDB" Content="Store In Database" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Left" Margin="150,87,0,0" VerticalAlignment="Top" Height="18" Width="174" GroupName="Storage" Checked="RB_SaveInDB_Checked"/>
+        <Button x:Name="Btn_Save" Content="Save Settings" FontFamily="Verdana" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="150,361,0,0" VerticalAlignment="Top" Width="174" Height="40" Click="Btn_Save_Click"/>
+        <Button Content="Back" FontFamily="Verdana" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Button_Click"/>
     </Grid>
 </Window>
