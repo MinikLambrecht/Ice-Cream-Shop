@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Media;
 using System.Windows.Input;
+using Newtonsoft.Json;
 
 namespace IsButik
 {
@@ -15,9 +16,24 @@ namespace IsButik
     {
         #region Variables
 
-        List<string> containerPrices = new List<string>();
+        private List<string> containerPrices = new List<string>();
 
         private float totalSprinklePrice;
+
+        private string container;
+        private string iceType;
+        private string scoops;
+        private string flavours;
+        private string sprinkles;
+
+        private string fullName;
+        private string cardType;
+        private string cardNumber;
+        private string exp_Month;
+        private string exp_Year;
+        private string CVC;
+
+        private string Order;
 
         #endregion
 
@@ -33,6 +49,37 @@ namespace IsButik
         }
 
         #region Methods
+
+        private void createString(string container, string iceType, string flavours, string sprinkles, string fullName, string cardName, string exp_Month, string exp_Year, string CVC)
+        {
+            Order = $"Name: {fullName}" + "\n" +
+                    $"Card type: {cardType}" + "\n" +
+                    $"Card Number: {cardNumber}" + "\n" +
+                    $"Expiration Month: {exp_Month}" + "\n" +
+                    $"Expiration Year: {exp_Year}" + "\n" +
+                    $"CVC: {CVC}" + "\n" +
+                    $"Container: {container} " + "\n" +
+                    $"Ice Type: {iceType}" + "\n" +
+                    $"Scoops: {scoops}" + "\n" +
+                    $"Flavours: {flavours}" + "\n" +
+                    $"Sprinkles {sprinkles}" + "\n";
+        }
+
+        public static void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
+        {
+            TextWriter writer = null;
+            try
+            {
+                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite);
+                writer = new StreamWriter(filePath, append);
+                writer.Write(contentsToWriteToFile);
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
 
         private void UpdateValues()
         {
@@ -195,6 +242,35 @@ namespace IsButik
 
         }
 
+        private void GetInformation()
+        {
+            if (CB_Containers.SelectedIndex != -1)
+            {
+                container = CB_Containers.SelectedItem.ToString();
+            }
+            if (CB_Scoops.SelectedIndex != -1)
+            {
+                scoops = CB_Scoops.SelectedItem.ToString();
+            }
+            if (RB_SN1.IsChecked == true)
+            {
+                sprinkles = CB_Sprinkles_1.SelectedItem.ToString();
+            }
+            if (RB_SN2.IsChecked == true)
+            {
+                sprinkles = CB_Sprinkles_1.SelectedItem.ToString() + ", " + CB_Sprinkles_2.SelectedItem.ToString();
+            }
+            if (RB_SN3.IsChecked == true)
+            {
+                sprinkles = CB_Sprinkles_1.SelectedItem.ToString() + ", " + CB_Sprinkles_2.SelectedItem.ToString() + ", " + CB_Sprinkles_3.SelectedItem.ToString();
+            }
+            fullName = txt_FullName.Text;
+            cardNumber = txt_CardNo.Text;
+            exp_Month = txt_Exp_Month.Text;
+            exp_Year = txt_Exp_Year.Text;
+            CVC = txt_CVC.Text;
+        }
+
         private void CreateDirectories()
         {
             // Path to appdata folder
@@ -277,6 +353,8 @@ namespace IsButik
             {
                 CB_Scoops.IsEnabled = false;
             }
+
+            iceType = "Gelato";
         }
 
         private void RB_Softice_Checked(object sender, RoutedEventArgs e)
@@ -289,6 +367,7 @@ namespace IsButik
             tab_Gelato.Visibility = Visibility.Hidden;
             tab_Softice.Visibility = Visibility.Visible;
             TabCtrl.SelectedIndex = 1;
+            iceType = "softice";
         }
 
         private void RB_SN0_Checked(object sender, RoutedEventArgs e)
@@ -358,6 +437,21 @@ namespace IsButik
             TabCtrl.SelectedIndex = 2;
         }
 
+        private void RB_Mastercard_Checked(object sender, RoutedEventArgs e)
+        {
+            cardType = "Mastercard";
+        }
+
+        private void RB_Visa_Checked(object sender, RoutedEventArgs e)
+        {
+            cardType = "Visa";
+        }
+
+        private void RB_CreditCards_Checked(object sender, RoutedEventArgs e)
+        {
+            cardType = "Credit Card";
+        }
+
         private void txt_FullName_GotFocus(object sender, RoutedEventArgs e)
         {
             // If the textbox is not null do nothing
@@ -403,12 +497,6 @@ namespace IsButik
             {
                 txt_FullName.Text = "Full Name";
             }
-        }
-
-        private void txt_FullName_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            // Allows only alphabetic input, if no letters are pressed no input will come
-            e.Handled = Regex.IsMatch(e.Text, @"^[a-zA-Z]+$");
         }
 
         private void txt_CardNo_GotFocus(object sender, RoutedEventArgs e)
@@ -645,5 +733,26 @@ namespace IsButik
 
         #endregion
 
+        private void btn_Pay_Click(object sender, RoutedEventArgs e)
+        {
+            Settings settings = new Settings();
+
+            // Path to appdata folder
+            string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            // Path to create root directory with
+            string rootDirectory = Path.Combine(appdata, "IceCreamShop");
+
+            if (settings.RB_SaveLocally.IsChecked == true)
+            {
+                GetInformation();
+                createString(container, iceType, flavours, sprinkles, fullName, cardNumber, exp_Month, exp_Year, CVC);
+                MessageBox.Show(Order);
+                WriteToJsonFile(rootDirectory, Order, false);
+            }
+            else
+            {
+
+            }
+        }
     }
 }
