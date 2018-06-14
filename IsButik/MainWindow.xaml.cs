@@ -9,6 +9,7 @@ using System;
 using System.Windows.Media;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace IsButik
 {
@@ -70,7 +71,7 @@ namespace IsButik
             TextWriter writer = null;
             try
             {
-                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite);
+                var contentsToWriteToFile = JsonConvert.SerializeObject(objectToWrite, Formatting.Indented);
                 writer = new StreamWriter(filePath, append);
                 writer.Write(contentsToWriteToFile);
             }
@@ -80,6 +81,23 @@ namespace IsButik
                     writer.Close();
             }
         }
+
+        public static T ReadFromJsonFile<T>(string filePath) where T : new()
+        {
+            TextReader reader = null;
+            try
+            {
+                reader = new StreamReader(filePath);
+                var fileContents = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<T>(fileContents);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+        }
+
 
         private void UpdateValues()
         {
@@ -736,18 +754,34 @@ namespace IsButik
         private void btn_Pay_Click(object sender, RoutedEventArgs e)
         {
             Settings settings = new Settings();
+            GetInformation();
+
+            Order order = new Order()
+            {
+                container = container,
+                scoops = scoops,
+                iceType = iceType,
+                flavours = flavours,
+                sprinkles = sprinkles,
+                fullName = fullName,
+                cardType = cardType,
+                cardNumber = cardNumber,
+                exp_Month = exp_Month,
+                exp_Year = exp_Year,
+                CVC = CVC
+            };
 
             // Path to appdata folder
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Path to create root directory with
             string rootDirectory = Path.Combine(appdata, "IceCreamShop");
+            
 
             if (settings.RB_SaveLocally.IsChecked == true)
             {
-                GetInformation();
                 createString(container, iceType, flavours, sprinkles, fullName, cardNumber, exp_Month, exp_Year, CVC);
                 MessageBox.Show(Order);
-                WriteToJsonFile(rootDirectory, Order, false);
+                WriteToJsonFile<Order>(rootDirectory + @"\order.json", order);
             }
             else
             {
