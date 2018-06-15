@@ -9,7 +9,6 @@ using System;
 using System.Windows.Media;
 using System.Windows.Input;
 using Newtonsoft.Json;
-using System.Web.Script.Serialization;
 
 namespace IsButik
 {
@@ -50,21 +49,6 @@ namespace IsButik
         }
 
         #region Methods
-
-        private void createString(string container, string iceType, string flavours, string sprinkles, string fullName, string cardName, string exp_Month, string exp_Year, string CVC)
-        {
-            Order = $"Name: {fullName}" + "\n" +
-                    $"Card type: {cardType}" + "\n" +
-                    $"Card Number: {cardNumber}" + "\n" +
-                    $"Expiration Month: {exp_Month}" + "\n" +
-                    $"Expiration Year: {exp_Year}" + "\n" +
-                    $"CVC: {CVC}" + "\n" +
-                    $"Container: {container} " + "\n" +
-                    $"Ice Type: {iceType}" + "\n" +
-                    $"Scoops: {scoops}" + "\n" +
-                    $"Flavours: {flavours}" + "\n" +
-                    $"Sprinkles {sprinkles}" + "\n";
-        }
 
         public static void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
         {
@@ -295,8 +279,10 @@ namespace IsButik
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Path to create root directory with
             string rootDirectory = Path.Combine(appdata, "IceCreamShop");
-            // Path to create subdirectory with
-            string subDir = Path.Combine(rootDirectory, "Settings");
+            // Path to create settings subdirectory with
+            string subdirSettings = Path.Combine(rootDirectory, "Settings");
+            // Path to create orders subdirectory with
+            string subdirOrders = Path.Combine(rootDirectory, "Orders");
 
             // If directory does not exist, create it. 
             if (!Directory.Exists(rootDirectory))
@@ -305,9 +291,15 @@ namespace IsButik
             }
 
             // If directory does not exist, create it. 
-            if (!Directory.Exists(subDir))
+            if (!Directory.Exists(subdirSettings))
             {
-                Directory.CreateDirectory(subDir);
+                Directory.CreateDirectory(subdirSettings);
+            }
+
+            // If directory does not exist, create it. 
+            if (!Directory.Exists(subdirOrders))
+            {
+                Directory.CreateDirectory(subdirOrders);
             }
         }
 
@@ -457,16 +449,19 @@ namespace IsButik
 
         private void RB_Mastercard_Checked(object sender, RoutedEventArgs e)
         {
+            // If checked then set the value to Mastercard
             cardType = "Mastercard";
         }
 
         private void RB_Visa_Checked(object sender, RoutedEventArgs e)
         {
+            // If checked then set the value to Visa
             cardType = "Visa";
         }
 
         private void RB_CreditCards_Checked(object sender, RoutedEventArgs e)
         {
+            // If checked then set the value to Credit Cards
             cardType = "Credit Card";
         }
 
@@ -749,13 +744,14 @@ namespace IsButik
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
-        #endregion
-
         private void btn_Pay_Click(object sender, RoutedEventArgs e)
         {
+            // User Settings window to check the save point
             Settings settings = new Settings();
+            // Initialize GetInformation Method to fill the information to the Order class
             GetInformation();
 
+            // Create a new instance of the Order class to serialize and turn into a json file
             Order order = new Order()
             {
                 container = container,
@@ -775,18 +771,201 @@ namespace IsButik
             string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // Path to create root directory with
             string rootDirectory = Path.Combine(appdata, "IceCreamShop");
-            
+            // Path to subdir
+            string subdir = Path.Combine(rootDirectory, "Orders");
+            // Generate a unique number for the order ids
+            string number = String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000);
 
             if (settings.RB_SaveLocally.IsChecked == true)
             {
-                createString(container, iceType, flavours, sprinkles, fullName, cardNumber, exp_Month, exp_Year, CVC);
-                MessageBox.Show(Order);
-                WriteToJsonFile<Order>(rootDirectory + @"\order.json", order);
+                WriteToJsonFile<Order>(subdir + "\\order" + "#" + $"{number}.json", order);
             }
             else
             {
 
             }
         }
+
+        private void Flavour_Vanilla_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Vanilla.Foreground == Brushes.Red)
+            {
+                txt_Vanilla.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Vanilla ", "");
+            }
+            else
+            {
+                txt_Vanilla.Foreground = Brushes.Red;
+                flavours = flavours + "Vanilla ";
+            }
+        }
+
+        private void Flavour_Strawberry_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Strawberry.Foreground == Brushes.Red)
+            {
+                txt_Strawberry.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Strawberry ", "");
+            }
+            else
+            {
+                txt_Strawberry.Foreground = Brushes.Red;
+                flavours = flavours + "Strawberry ";
+            }
+        }
+
+        private void Flavour_Chocolate_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Chocolate.Foreground == Brushes.Red)
+            {
+                txt_Chocolate.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Chocolate ", "");
+            }
+            else
+            {
+                txt_Chocolate.Foreground = Brushes.Red;
+                flavours = flavours + "Chocolate ";
+            }
+        }
+
+        private void Flavour_Limone_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Limone.Foreground == Brushes.Red)
+            {
+                txt_Limone.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Limone ", "");
+            }
+            else
+            {
+                txt_Limone.Foreground = Brushes.Red;
+                flavours = flavours + "Limone ";
+            }
+        }
+
+        private void Flavour_Pistacchio_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Pistacchio.Foreground == Brushes.Red)
+            {
+                txt_Pistacchio.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Pistacchio ", "");
+            }
+            else
+            {
+                txt_Pistacchio.Foreground = Brushes.Red;
+                flavours = flavours + "Pistacchio ";
+            }
+        }
+
+        private void Flavour_Caffé_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Caffé.Foreground == Brushes.Red)
+            {
+                txt_Caffé.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Caffé ", "");
+            }
+            else
+            {
+                txt_Caffé.Foreground = Brushes.Red;
+                flavours = flavours + "Caffé ";
+            }
+        }
+
+        private void Flavour_Pesca_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Pesca.Foreground == Brushes.Red)
+            {
+                txt_Pesca.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Pesca ", "");
+            }
+            else
+            {
+                txt_Pesca.Foreground = Brushes.Red;
+                flavours = flavours + "Pesca ";
+            }
+        }
+
+        private void Flavour_Cocco_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Cocco.Foreground == Brushes.Red)
+            {
+                txt_Cocco.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Cocco ", "");
+            }
+            else
+            {
+                txt_Cocco.Foreground = Brushes.Red;
+                flavours = flavours + "Cocco ";
+            }
+        }
+
+        private void Flavour_Stracciatella_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Stracciatella.Foreground == Brushes.Red)
+            {
+                txt_Stracciatella.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Stracciatella ", "");
+            }
+            else
+            {
+                txt_Stracciatella.Foreground = Brushes.Red;
+                flavours = flavours + "Stracciatella ";
+            }
+        }
+
+        private void Flavour_Menta_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Menta.Foreground == Brushes.Red)
+            {
+                txt_Menta.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Menta ", "");
+            }
+            else
+            {
+                txt_Menta.Foreground = Brushes.Red;
+                flavours = flavours + "Menta ";
+            }
+        }
+
+        private void Flavour_Melone_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Melone.Foreground == Brushes.Red)
+            {
+                txt_Melone.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Melone ", "");
+            }
+            else
+            {
+                txt_Melone.Foreground = Brushes.Red;
+                flavours = flavours + "Melone ";
+            }
+        }
+
+        private void Flavour_Banana_Click(object sender, RoutedEventArgs e)
+        {
+            // If textcolor is red change it to black, else change it to red
+            if (txt_Banana.Foreground == Brushes.Red)
+            {
+                txt_Banana.Foreground = Brushes.Black;
+                flavours = flavours.Replace("Banana ", "");
+            }
+            else
+            {
+                txt_Banana.Foreground = Brushes.Red;
+                flavours = flavours + "Banana ";
+            }
+        }
+
+        #endregion
     }
 }
